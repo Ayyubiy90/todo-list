@@ -12,6 +12,9 @@ const UI = (() => {
       const projectElement = document.createElement("div");
       projectElement.textContent = project.name;
       projectElement.dataset.index = index;
+      projectElement.addEventListener("click", () => {
+        displayTodos(index);
+      });
       projectContainer.appendChild(projectElement);
     });
   };
@@ -24,8 +27,17 @@ const UI = (() => {
       const todoElement = document.createElement("div");
       todoElement.textContent = `${todo.title} - ${todo.dueDate}`;
       todoElement.dataset.index = index;
+      todoElement.addEventListener("click", () => {
+        expandTodoDetails(todo);
+      });
       todoContainer.appendChild(todoElement);
     });
+  };
+
+  const expandTodoDetails = (todo) => {
+    // Function to expand and display todo details
+    // Implement the UI for viewing/editing details
+    console.log(todo);
   };
 
   const addProject = (name) => {
@@ -41,11 +53,39 @@ const UI = (() => {
     displayTodos(projectIndex);
   };
 
+  const handleProjectFormSubmit = (event) => {
+    event.preventDefault();
+    const projectNameInput = document.getElementById("project-name");
+    const projectName = projectNameInput.value.trim();
+    if (projectName !== "") {
+      addProject(projectName);
+      projectNameInput.value = "";
+    }
+  };
+
+  const handleTodoFormSubmit = (event) => {
+    event.preventDefault();
+    const projectIndex = 0; // Assuming adding todos to the default project for now
+    const title = document.getElementById("todo-title").value.trim();
+    const description = document
+      .getElementById("todo-description")
+      .value.trim();
+    const dueDate = document.getElementById("todo-dueDate").value;
+    const priority = document.getElementById("todo-priority").value.trim();
+    if (title !== "" && dueDate !== "") {
+      const todo = new Todo(title, description, dueDate, priority);
+      addTodo(projectIndex, todo);
+      document.getElementById("todo-form").reset();
+    }
+  };
+
   return {
     displayProjects,
     displayTodos,
     addProject,
     addTodo,
+    handleProjectFormSubmit,
+    handleTodoFormSubmit,
   };
 })();
 
