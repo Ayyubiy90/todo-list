@@ -1,10 +1,41 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 #content {
   padding: 20px;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+input, textarea, button {
+  display: block;
+  margin: 10px 0;
+  padding: 10px;
+  width: 100%;
+  max-width: 400px;
+}
+
+button {
+  cursor: pointer;
+}
+
+#project-container, #todo-container {
+  margin-bottom: 20px;
+}
+
+#project-container div, #todo-container div {
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin: 5px 0;
+  cursor: pointer;
+}
+
+#project-container div:hover, #todo-container div:hover {
+  background-color: #f0f0f0;
 }
